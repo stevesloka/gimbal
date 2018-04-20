@@ -19,6 +19,7 @@ import (
 
 	localmetrics "github.com/heptio/gimbal/discovery/pkg/metrics"
 	"github.com/sirupsen/logrus"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/runtime"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes"
@@ -40,16 +41,19 @@ type Queue struct {
 	Threadiness int
 	Metrics     localmetrics.DiscovererMetrics
 	ClusterName string
+	ClusterType string
 }
 
 // Action that is added to the queue for processing
 type Action interface {
 	Sync(kube kubernetes.Interface, lm localmetrics.DiscovererMetrics, clusterName string) error
+	ObjectMeta() *metav1.ObjectMeta
 }
 
 // Enqueue adds a new resource action to the worker queue
 func (sq *Queue) Enqueue(action Action) {
 	sq.Workqueue.AddRateLimited(action)
+	sq.Metrics.QueueSizeGaugeMetric(action.ObjectMeta().GetNamespace(), sq.ClusterName, sq.ClusterType, sq.Workqueue.Len())
 }
 
 // Run starts the queue workers. It blocks until the stopCh is closed.
