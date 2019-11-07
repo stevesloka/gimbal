@@ -11,13 +11,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package openstack
+package translator
 
 import (
 	"testing"
 
+	"github.com/vmware-tanzu/gimbal/pkg/openstack"
+
 	"github.com/stretchr/testify/assert"
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -221,15 +223,15 @@ func TestDiffServices(t *testing.T) {
 func TestDiffEndpoints(t *testing.T) {
 	tests := []struct {
 		name           string
-		current        []Endpoints
-		desired        []Endpoints
-		expectedAdd    []Endpoints
-		expectedUpdate []Endpoints
-		expectedDel    []Endpoints
+		current        []openstack.Endpoints
+		desired        []openstack.Endpoints
+		expectedAdd    []openstack.Endpoints
+		expectedUpdate []openstack.Endpoints
+		expectedDel    []openstack.Endpoints
 	}{
 		{
 			name: "new endpoint",
-			desired: []Endpoints{
+			desired: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -240,7 +242,7 @@ func TestDiffEndpoints(t *testing.T) {
 					upstreamName: "upname",
 				},
 			},
-			expectedAdd: []Endpoints{
+			expectedAdd: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -254,7 +256,7 @@ func TestDiffEndpoints(t *testing.T) {
 		},
 		{
 			name: "updated endpoint",
-			current: []Endpoints{
+			current: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -281,7 +283,7 @@ func TestDiffEndpoints(t *testing.T) {
 					upstreamName: "upname",
 				},
 			},
-			desired: []Endpoints{
+			desired: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -308,7 +310,7 @@ func TestDiffEndpoints(t *testing.T) {
 					upstreamName: "upname",
 				},
 			},
-			expectedUpdate: []Endpoints{
+			expectedUpdate: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -338,7 +340,7 @@ func TestDiffEndpoints(t *testing.T) {
 		},
 		{
 			name: "deleted service",
-			current: []Endpoints{
+			current: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -365,7 +367,7 @@ func TestDiffEndpoints(t *testing.T) {
 					upstreamName: "upname",
 				},
 			},
-			expectedDel: []Endpoints{
+			expectedDel: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -395,7 +397,7 @@ func TestDiffEndpoints(t *testing.T) {
 		},
 		{
 			name: "order doesn't matter for update",
-			current: []Endpoints{
+			current: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{
@@ -447,7 +449,7 @@ func TestDiffEndpoints(t *testing.T) {
 					upstreamName: "upname",
 				},
 			},
-			desired: []Endpoints{
+			desired: []openstack.Endpoints{
 				{
 					endpoints: v1.Endpoints{
 						ObjectMeta: metav1.ObjectMeta{

@@ -23,7 +23,7 @@ import (
 const (
 	// GimbalLabelBackend is the key of the label that contains the cluster name
 	GimbalLabelBackend          = "gimbal.heptio.com/backend"
-	gimbalLabelService          = "gimbal.heptio.com/service"
+	GimbalLabelService          = "gimbal.heptio.com/service"
 	maxKubernetesDNSLabelLength = 63
 )
 
@@ -32,7 +32,7 @@ const (
 func AddGimbalLabels(backendname, name string, existingLabels map[string]string) map[string]string {
 	gimbalLabels := map[string]string{
 		GimbalLabelBackend: ShortenKubernetesLabelValue(backendname),
-		gimbalLabelService: ShortenKubernetesLabelValue(name),
+		GimbalLabelService: ShortenKubernetesLabelValue(name),
 	}
 	if existingLabels == nil {
 		return gimbalLabels

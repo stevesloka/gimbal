@@ -22,6 +22,7 @@ require (
 	github.com/prometheus/procfs v0.0.0-20180408092902-8b1c2da0d56d // indirect
 	github.com/sirupsen/logrus v1.0.6
 	github.com/stretchr/testify v1.2.2
+	github.com/vmware/govmomi v0.21.0
 	golang.org/x/time v0.0.0-20180412165947-fbb02b2291d2 // indirect
 	gopkg.in/airbrake/gobrake.v2 v2.0.9 // indirect
 	gopkg.in/gemnasium/logrus-airbrake-hook.v2 v2.1.2 // indirect
