@@ -3,7 +3,7 @@ package vmware
 import (
 	"strconv"
 
-	"github.com/vmware-tanzu/gimbal/pkg/translator"
+	"github.com/projectcontour/gimbal/pkg/translator"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )

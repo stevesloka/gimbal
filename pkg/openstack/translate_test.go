@@ -16,6 +16,8 @@ package openstack
 import (
 	"testing"
 
+	"github.com/projectcontour/gimbal/pkg/translator"
+
 	"github.com/stretchr/testify/assert"
 
 	"github.com/gophercloud/gophercloud/openstack/networking/v2/extensions/lbaas_v2/listeners"
@@ -552,14 +554,14 @@ func TestKubeEndpoints(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			gotReturn := kubeEndpoints(tc.backendName, tc.tenantName, tc.lbs, tc.pools)
 			// Cannot use assert.Equal on the structs as the order of subsets is undetermined.
-			var got []Endpoints
+			var got []translator.Endpoint
 			got = append(got, gotReturn...)
 
 			for i := range tc.expected {
-				assert.Equal(t, tc.expected[i].Namespace, got[i].endpoints.Namespace)
-				assert.Equal(t, tc.expected[i].Name, got[i].endpoints.Name)
-				assert.Equal(t, tc.expected[i].Labels, got[i].endpoints.Labels)
-				assert.ElementsMatch(t, tc.expected[i].Subsets, got[i].endpoints.Subsets)
+				assert.Equal(t, tc.expected[i].Namespace, got[i].Endpoints.Namespace)
+				assert.Equal(t, tc.expected[i].Name, got[i].Endpoints.Name)
+				assert.Equal(t, tc.expected[i].Labels, got[i].Endpoints.Labels)
+				assert.ElementsMatch(t, tc.expected[i].Subsets, got[i].Endpoints.Subsets)
 			}
 		})
 	}

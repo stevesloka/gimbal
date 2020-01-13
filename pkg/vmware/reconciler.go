@@ -11,7 +11,7 @@ import (
 
 	"github.com/vmware/govmomi/vapi/tags"
 
-	"github.com/vmware-tanzu/gimbal/pkg/translator"
+	"github.com/projectcontour/gimbal/pkg/translator"
 
 	"github.com/vmware/govmomi/view"
 
@@ -21,9 +21,9 @@ import (
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
+	localmetrics "github.com/projectcontour/gimbal/pkg/metrics"
+	"github.com/projectcontour/gimbal/pkg/sync"
 	"github.com/sirupsen/logrus"
-	localmetrics "github.com/vmware-tanzu/gimbal/pkg/metrics"
-	"github.com/vmware-tanzu/gimbal/pkg/sync"
 	"github.com/vmware/govmomi/vim25/types"
 	"k8s.io/client-go/kubernetes"
 )

@@ -16,7 +16,7 @@ package translator
 import (
 	"testing"
 
-	"github.com/vmware-tanzu/gimbal/pkg/openstack"
+	"github.com/projectcontour/gimbal/pkg/openstack"
 
 	"github.com/stretchr/testify/assert"
 	v1 "k8s.io/api/core/v1"

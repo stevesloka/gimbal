@@ -23,18 +23,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vmware-tanzu/gimbal/pkg/vmware"
+	"github.com/projectcontour/gimbal/pkg/vmware"
 
-	"github.com/vmware-tanzu/gimbal/pkg/buildinfo"
+	"github.com/projectcontour/gimbal/pkg/buildinfo"
 	"github.com/vmware/govmomi"
 	"github.com/vmware/govmomi/find"
 
+	"github.com/projectcontour/gimbal/pkg/k8s"
+	localmetrics "github.com/projectcontour/gimbal/pkg/metrics"
+	"github.com/projectcontour/gimbal/pkg/signals"
+	"github.com/projectcontour/gimbal/pkg/util"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/sirupsen/logrus"
-	"github.com/vmware-tanzu/gimbal/pkg/k8s"
-	localmetrics "github.com/vmware-tanzu/gimbal/pkg/metrics"
-	"github.com/vmware-tanzu/gimbal/pkg/signals"
-	"github.com/vmware-tanzu/gimbal/pkg/util"
 	_ "k8s.io/api/core/v1"
 )
 
