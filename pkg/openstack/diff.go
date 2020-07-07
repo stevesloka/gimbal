@@ -1,4 +1,4 @@
-// Copyright © 2018 the Gimbal contributors.
+// Copyright Project Contour Authors
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -16,7 +16,7 @@ package openstack
 import (
 	"reflect"
 
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 )
 
 func diffServices(desired, current []v1.Service) (add, update, del []v1.Service) {
